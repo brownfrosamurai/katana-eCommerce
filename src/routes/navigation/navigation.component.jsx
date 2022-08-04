@@ -19,6 +19,9 @@ const Navigation = () => {
           <Link className="nav-link" to="/shop">
             SHOP
           </Link>
+          <Link className="nav-link" to="/sign-in">
+            SIGNIN
+          </Link>
         </div>
       </div>
       {/* the outlet react component ensures that the navigation sticks across all pages  */}
