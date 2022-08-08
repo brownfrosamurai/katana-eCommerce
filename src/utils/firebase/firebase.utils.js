@@ -1,4 +1,6 @@
-import { initializeApp } from 'firebase/app'
+import {
+  initializeApp
+} from 'firebase/app'
 
 import {
   signInWithRedirect,
@@ -7,7 +9,8 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut
+  onAuthStateChanged,
+  signOut,
 } from 'firebase/auth'
 
 import {
@@ -32,19 +35,18 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 // creates an instance of the google provider class 
 const googleProvider = new GoogleAuthProvider()
-
 googleProvider.setCustomParameters({
   prompt: 'select_account'
 })
 
 export const auth = getAuth()
+
 export const signInWithGooglePopUp = () => signInWithPopup(auth, googleProvider)
+
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider)
 
-// create firestore db 
 export const db = getFirestore()
 
-// Create a user after authentication 
 export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) => {
   if (!userAuth) return
 
@@ -83,3 +85,5 @@ export const signUserInWithEmailAndPassword = async (email, password) => {
 }
 
 export const signOutUser = async () => await signOut(auth)
+
+export const onAuthStateChangedListener = async (callback) => onAuthStateChanged(auth, callback)

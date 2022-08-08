@@ -1,16 +1,13 @@
-import { useState, useContext } from "react"
+import { useState } from "react"
 
 import FormInput from "../form-input/form-input.component"
 import Button from "../button/button.component"
-
-import { UserContext } from "../../contexts/user.context"
 
 import './sign-in-form.styles.scss'
 
 import {
   signUserInWithEmailAndPassword,
   signInWithGooglePopUp,
-  createUserDocumentFromAuth
 } from "../../utils/firebase/firebase.utils"
 
 const defaultFormFields = {
@@ -19,11 +16,9 @@ const defaultFormFields = {
 }
 
 const SignInForm = () => {
-
   const [formFields, setFormFields] = useState(defaultFormFields)
-  const { email, password } = formFields
-  const { setCurrentUser } = useContext(UserContext)
 
+  const { email, password } = formFields
 
   const resetFormFields = () => setFormFields(defaultFormFields)
 
@@ -37,8 +32,6 @@ const SignInForm = () => {
     const { user } = await signInWithGooglePopUp()
 
     if (!user) return
-
-    await createUserDocumentFromAuth(user)
   }
 
   const handleSubmit = async (event) => {
@@ -52,11 +45,9 @@ const SignInForm = () => {
     }
 
     try {
-      const { user } = await signUserInWithEmailAndPassword(email, password)
-
-      setCurrentUser(user)
-
+      await signUserInWithEmailAndPassword(email, password)
       resetFormFields()
+      
     } catch (error) {
       switch (error.code) {
         case 'auth/wrong-password':
@@ -76,6 +67,7 @@ const SignInForm = () => {
       <h2>I already have an account</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
+
         <FormInput
           label="Email Address"
           type="email"
@@ -93,15 +85,16 @@ const SignInForm = () => {
           name="password"
           value={password}
         />
+
         <div className="buttons-container">
           <Button type="submit">Sign In </Button>
           <Button type="button" buttonType="google" onClick={signInWithGoogle} >
             Google sign in
-          </Button></div>
+          </Button>
+        </div>
 
       </form>
     </div>
-
   )
 }
 

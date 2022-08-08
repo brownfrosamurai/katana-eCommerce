@@ -14,8 +14,6 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>
-        {/* Outlet components  */}
-        {/* the index props tells react to match the path of the home component to the navigation i.e(localhost:3000) should render both navigation and home components */}
         <Route index element={<Home />} />
         <Route path="shop" element={<Shop />} />
         <Route path="auth" element={<Authentication />} />

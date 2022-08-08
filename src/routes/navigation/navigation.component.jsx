@@ -1,8 +1,6 @@
 import { Outlet, Link } from 'react-router-dom'
-// Link component behaves like anchor tags but withhelp from react router dom instead 
-import { Fragment, useContext } from 'react'
 
-import './navigation.styles.scss'
+import { Fragment, useContext } from 'react'
 
 import { signOutUser } from '../../utils/firebase/firebase.utils'
 
@@ -10,13 +8,13 @@ import { UserContext } from '../../contexts/user.context'
 
 import { ReactComponent as CrownLogo } from '../../assets/crown.svg'
 
-const Navigation = () => {
+import './navigation.styles.scss'
 
-  const { currentUser, setCurrentUser } = useContext(UserContext)
+const Navigation = () => {
+  const { currentUser } = useContext(UserContext)
 
   const signOutHandler = async () => {
-   await signOutUser()
-   setCurrentUser(null)
+    await signOutUser()
   }
 
   return (
@@ -31,7 +29,9 @@ const Navigation = () => {
           </Link>
           {
             currentUser ? (
-              <span className='nav-link' onClick={signOutHandler}> SIGN OUT</span>
+              <span className='nav-link' onClick={signOutHandler}>
+                SIGN OUT
+              </span>
             ) : (
               <Link className="nav-link" to="/auth">
                 SIGN IN
