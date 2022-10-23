@@ -4,7 +4,6 @@ import { CartContext } from '../../contexts/cart.context'
 
 import CheckoutItem from '../../components/checkout-item/checkout-item.component'
 
-import './checkout.styles'
 import { CheckoutContainer, CheckoutHeader, HeaderBlock, Total } from './checkout.styles'
 
 const Checkout = () => {
