@@ -42,12 +42,11 @@ export const Footer = styled.div`
   font-size: 18px;
 `
 
-export const Name = styled.div`
+export const Name = styled.span`
   width: 90%;
   margin-bottom: 15px;
 `
 
-export const Price = styled.div`
+export const Price = styled.span`
   width: 10%;
 `
-
