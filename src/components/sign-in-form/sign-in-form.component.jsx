@@ -1,14 +1,15 @@
 import { useState } from "react"
 
 import FormInput from "../form-input/form-input.component"
-import Button from "../button/button.component"
+import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component"
 
-import './sign-in-form.styles.scss'
+import './sign-in-form.styles'
 
 import {
   signUserInWithEmailAndPassword,
   signInWithGooglePopUp,
 } from "../../utils/firebase/firebase.utils"
+import { ButtonContainer, H2, SignupContainer } from "./sign-in-form.styles"
 
 const defaultFormFields = {
   email: "",
@@ -30,6 +31,7 @@ const SignInForm = () => {
 
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopUp()
+    console.log({user})
 
     if (!user) return
   }
@@ -63,8 +65,8 @@ const SignInForm = () => {
   }
 
   return (
-    <div className="sign-up-container">
-      <h2>I already have an account</h2>
+    <SignupContainer>
+      <H2>I already have an account</H2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
 
@@ -86,15 +88,15 @@ const SignInForm = () => {
           value={password}
         />
 
-        <div className="buttons-container">
+        <ButtonContainer>
           <Button type="submit">Sign In </Button>
-          <Button type="button" buttonType="google" onClick={signInWithGoogle} >
+          <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle} >
             Google sign in
           </Button>
-        </div>
+        </ButtonContainer>
 
       </form>
-    </div>
+    </SignupContainer>
   )
 }
 
